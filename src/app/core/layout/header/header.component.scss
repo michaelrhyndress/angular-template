@@ -1,0 +1,179 @@
+@import "../../../../assets/styles/mixins";
+@import "../../../../assets/styles/vars";
+@import "../../../../assets/styles/vars-colors";
+
+$logoHeight: 36px;
+$headerSize: $logoHeight*2;
+
+header {
+  height: $headerSize;
+  width: 100%;
+  margin: 0 auto;
+  background-color: $color-white;
+  top: 0;
+  position: relative; // For older browsers
+  position: sticky;
+  background-color: $color-white;
+  z-index: 999;
+  box-shadow: 1px 1px 6px 0px rgba(0,0,0,0.16);
+
+  .wrapper {
+    height: $headerSize;
+    max-width: $max-width;
+    display: block;
+    margin: 0 auto;
+    position: initial;
+    padding: 0 10px;
+
+    nav {
+      display: inline-block;
+      width: 100%;
+      font-weight: bold;
+
+      .nav-wrapper {
+        display: inline-block;
+        position: relative;
+        margin: 0;
+        width: 100%;
+        padding: $logoHeight - 10 0 0 $headerSize*2.2;
+        // line-height: $headerSize;
+
+        @include respond-to($to: $screen-sm-min) {
+          margin-top: $headerSize+5px;
+          background-color: white;
+          border-top: 2px solid $color-secondary;
+          line-height: 0;
+          display: none;
+          padding: 0;
+          
+          &.open {
+            display: block;
+            box-shadow: 1px 1px 6px 0px rgba(0,0,0,0.16);
+            padding: 0;
+            
+            ul {
+              overflow-x: hidden;
+              overflow-y: scroll; //Breaks triangle
+              max-height: $logoHeight*8.5;
+              width: 100%;
+            }
+
+            &:before, &:after {
+              content: '';
+              display: block;
+              position: absolute;
+              bottom: 100%;
+              width: 0;
+              height: 0;
+            }
+            &:before {
+              right: (($logoHeight/2) + 5);
+              border: 14px solid transparent;
+              border-bottom-color: $color-secondary;
+            }
+            &:after {
+              right: (($logoHeight/2) + 8);
+              border: 11px solid transparent;
+              border-bottom-color: #fff;
+            }
+          }
+
+        }
+
+        ul {
+          li {
+            position: relative;
+            display: inline-block;
+            list-style: none;
+
+            @include respond-to($to: $screen-sm-min) {
+              width: 100%;
+              display: inline-block;
+              text-align: center;
+              border-bottom: 1px solid #ccc;
+              padding: 25px 0;
+              line-height: 1.1;
+            }
+
+            @include respond-to($from: $screen-sm-min) {
+              &:last-child {
+                margin-right: 0;
+              }
+
+              & + li::before {
+                content: "|";
+                padding: 0 15px;
+                color: $color-quinary;
+              }
+            }
+
+            a {
+              color: #111;
+              text-decoration: none;
+              background-color: transparent;
+              padding: 0 5px;
+              z-index: 1000;
+
+              &:hover, &:focus {
+                border-bottom: 2px solid $color-primary;
+              }
+
+              &.active, &:active {
+                color: $color-primary;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .hamburger {
+    z-index: 1000;
+    $hamburgerWidth: 28px;
+    display: none;
+    cursor: pointer;
+    padding: (($logoHeight/2) + 5);
+    float: right;
+    
+    @include respond-to($to: $screen-sm-min) {
+      display: block;
+    }
+
+    .bar {
+      width: $hamburgerWidth;
+      height: 3px;
+      background-color: #333;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+
+    &.open .bar {
+        &.a {
+          transform: rotate(-45deg) translate(-3px, 6px);
+        }
+        &.b {
+          opacity: 0;
+        }
+        &.c {
+          transform: rotate(45deg) translate(-7px, -10px);;
+        }
+    }
+  }
+
+  .logo {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: $logoHeight/2;
+    padding-right: 0;
+
+    img {
+      position: relative;
+      width: 6rem;
+      height: $logoHeight;
+      display: block;
+    }
+  }
+}

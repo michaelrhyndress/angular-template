@@ -1,0 +1,100 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/vars-colors";
+
+$persona-size: 32px;
+
+.Persona {
+    font-size: .8rem;
+    font-weight: 400;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    color: rgb(51, 51, 51);
+    position: relative;
+    display: inline-table;
+    
+    // Fix alignment and sizing for header, find better way to do this later
+    top: -5px;
+    max-width: 150px;
+
+    &--coin {
+        font-size: .8rem;
+        font-weight: 400;
+        display: block;
+        float: left;
+    }
+
+    &--imageArea {
+        position: relative;
+        text-align: center;
+        height: $persona-size;
+        width: $persona-size;
+    }
+
+    &--initials {
+        color: rgb(255, 255, 255);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: $persona-size;
+        height: $persona-size;
+        background-color: $color-tertiary; // rgb(30, 113, 69);
+        border-radius: 50%;
+    }
+
+    &--details {
+        text-align: left;
+        padding-left: $persona-size + 5;
+
+        @include respond-to($from: $screen-sm-min, $to: $screen-md-min) {
+            visibility: hidden;
+            width: 0;
+        }
+    }
+
+    &--text {
+        &--primary {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: rgb(51, 51, 51);
+            font-weight: 400;
+            font-size: 14px;
+            overflow: hidden;
+        }
+    
+        &--secondary {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: rgb(102, 102, 102);
+            font-weight: 400;
+            font-size: 12px;
+            overflow: hidden;
+        }
+    
+        &--tertiary {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: rgb(102, 102, 102);
+            font-weight: 400;
+            font-size: 12px;
+            display: none;
+            overflow: hidden;
+        }
+    
+        &--optional {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: rgb(102, 102, 102);
+            font-weight: 400;
+            font-size: 12px;
+            display: none;
+            overflow: hidden;
+        }
+    }
+
+    &:hover {
+        .Persona--initials {
+            background-color: $color-tertiary-alt;
+        }
+    }
+}

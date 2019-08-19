@@ -1,0 +1,68 @@
+// /*------------------------------------*\
+//    COLORS
+// \*------------------------------------*/
+// Neutrals
+$color-white             : #fff;
+$color-black-lightest	 : #333;
+$color-black-lighter	 : #45453F;
+$color-black-light       : #1A1A24; 
+$color-black             : #111;
+$color-black-dark		 : #000000;
+$color-grey-lightest     : #eeeeee;
+$color-grey-lighter      : #e0e0e0;
+$color-grey-light        : #F8F8FC;
+$color-grey              : #999;
+$color-grey-dark         : #5555f3;
+$color-grey-darker       : #666;
+
+// RED
+$color-red               : #e80033;
+$color-red-dark          : #d0002e;
+$color-red-darker        : #bf0d3e;
+$color-red-darkest	     : #ac0c38;
+
+// BLUE
+$color-blue		         : #337ab7;
+$color-blue-dark	     : #3f8aff;
+$color-blue-darker	     : #286090;
+$color-blue-darkest		 : #3b5998;
+
+// YELLOW
+$color-yellow-lightest   : #fff8ea;
+$color-yellow-lighter	 : #FEFFAE;
+$color-yellow-light		 : #F7F14C;
+$color-yellow		     : #fff601;
+$color-yellow-dark	     : #EFDC01;
+$color-yellow-darkest	 : #716F42;
+
+// ORANGE
+$color-orange-lightest	: #ffa500;
+$color-orange-light		: #ed8b00;
+$color-orange			: #FF6600;
+$color-orange-dark		: #d57d00;
+$color-orange-darker	: #f15d22;
+$color-orange-darkest	: #d8541f;
+ 
+// PURPLE 
+$color-purple			: #551A8B;
+$color-purple-darker	: #910048;
+
+// MAGENTA
+$color-magenta-light	: #ca296c;
+$color-magenta			: #d0006f;
+$color-magenta-darker	: #bb0064;  
+
+
+$color-primary: #E80033; //Dow Red
+$color-primary-alt: #b9111a; //Dow Red Dark
+$color-secondary: #415364; //Dow Slate Gray
+$color-secondary-alt: #5e514d; //Dow Brown
+$color-tertiary: #193f5e; //Dow Blue
+$color-tertiary-alt: #00b2a9; //Dow Teal
+$color-quinary: #cbc5b5; //Dow Tan
+$color-quinary-alt: #febb12; //Dow Gold
+$color-senary: #829995; //Dow Sage
+
+//Settings
+$color-text				: $color-black !default;
+$color-border			: $color-grey-lightest !default;

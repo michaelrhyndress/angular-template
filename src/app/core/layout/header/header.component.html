@@ -1,0 +1,25 @@
+<header>
+  <div class="wrapper">
+    <a [routerLink]="['/']" class="logo">
+      <img alt="The Dow Chemical Company" src="../../../../assets/images/brand/dow-logo.svg">
+    </a>
+  
+    <nav aria-label="Main menu">
+      <span class="hamburger" (click)="toggleMenuOpenState()" [ngClass]="{'open' : menuOpen }">
+        <div class="bar a"></div>
+        <div class="bar b"></div>
+        <div class="bar c"></div>
+      </span>
+      <span class="nav-wrapper" [ngClass]="{'open' : menuOpen }">
+        <ul class="text-right">
+          <li><a [routerLink]="['/']">Home</a></li>
+          <li><a [routerLink]="['/test']">Test</a></li>
+          <li *ngIf="loggedIn === false"><a (click)="login()">Login</a></li>
+          <li *ngIf="loggedIn === true" (click)="logout()" class="cursor-pointer">
+            <app-persona [persona]="user"></app-persona>
+          </li>
+        </ul>
+      </span>
+    </nav>
+  </div>
+</header>

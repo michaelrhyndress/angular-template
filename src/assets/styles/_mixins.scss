@@ -1,0 +1,171 @@
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+
+
+// responsive manager
+// @define                {mixin} used to provide cleaner method of accessing breakpoints
+// @param @required $args {map}                ($from: _, $to: _, $media-type: _)
+// @param $media-type     {String}             (all | print | screen | speech)
+// @param $from           {String, cssValue}   min-width
+// @param $to             {String, cssValue}   max-width
+// @example 
+//    #myElement {
+//       width: 500px // default
+//       @include respond-to($to: 'small') { width: 300px } // responsive from 0 to 'small' breakpoint
+//    }
+@mixin respond-to($args...) {
+   // define defaults
+   $args: keywords($args);
+   $from: 0px;
+   $media-type: 'screen';
+   $to: 0px;
+
+   // find if using different media type
+   @if map-has-key($args, 'media-type') {
+      $media-type: map-get($args, 'media-type');
+      $args: map-remove($args, $media-type);
+   }   
+   // find min-width
+   @if map-has-key($args, 'from') {
+      $from: map-get($args, 'from');
+      $args: map-remove($args, 'from');
+      $from: $from + 1px;
+   }
+
+   // find max-width
+   @if map-has-key($args, 'to') {
+      $to: map-get($args, 'to');
+      $args: map-remove($args, 'to');
+      
+      @media #{$media-type} and (min-width: #{$from}) and (max-width: #{$to}) {
+         @content;
+      }
+   }
+   @else {
+      @if $from == 0px and $to == 0px {
+         // didn't set values, or making a screen type media query
+         @warn 'min and max widths are set to 0 or weren`t provided. Are you sure you wanted to just make a @media {screen-type} {} query?';
+         @media #{$media-type} {
+            @content;
+         }
+      }
+      @else {
+         // media query should only have min-width
+         @media #{$media-type} and (min-width: #{$from}) {
+            @content;
+         }
+      }    
+   }
+}
+
+
+// BOOTSTRAP - CENTER ALIGN COLUMNS
+@mixin center-block() {
+	float: none !important;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// VERTICAL ALIGN
+@mixin vertical-align($position: absolute) {
+	position: $position;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+// CENTER ALIGN
+@mixin center-align($position: absolute) {
+	position: $position;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform:     translate(-50%, -50%);
+	transform:         translate(-50%, -50%);
+}
+ 
+ // COLUMNS PULL RIGHT/LEFT
+ @mixin pull-columns-right{
+    float: right !important;
+ }
+ 
+ @mixin pull-columns-left{
+    float: left !important;
+ }
+ 
+ // CLEARFIX
+ @mixin clearfix() {
+    &:before,
+    &:after {
+       content: " ";
+       display: table;
+    }
+       &:after {
+       clear: both;
+    }
+ }
+  
+ // BACKGROUND OPACITY
+ @mixin background-RGBA($color, $opacity) {
+    background-color: $color;
+    background-color: rgba($color, $opacity);
+ }
+ 
+ // BOX SHADOW
+ @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+    @if $inset {
+       box-shadow:inset $top $left $blur $color;
+    } @else {
+       box-shadow: $top $left $blur $color;
+   }
+ }
+ 
+ // TEXT FIELD
+ @mixin text-field {
+    display: inline-block;
+    outline: none;
+    text-decoration: none;
+    padding: .5em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    border-radius: $border-radius;
+    @include box-shadow(0, 1px, 2px, rgba(0, 0, 0, 0.2));
+ }
+ 
+ // GRADIENTS
+ @mixin gradient($from, $to) {
+    background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+    background: -moz-linear-gradient(top,  $from, $to);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+ }
+ 
+ // TRANSFORM
+ @mixin rotate($degrees, $axis: ""){
+    @if $axis != ""{
+      @if $axis == "X"{
+        transform: rotateX($degrees);
+      }
+      @if $axis == "Y"{
+        transform: rotateY($degrees);
+      }
+    } @else {
+        transform: rotate($degrees);
+    } 
+  }

@@ -1,0 +1,81 @@
+@import './mixins';
+@import './vars';
+@import './vars-colors';
+
+/* ----- Button Variables ----- */
+// DEFAULT BUTTONS FOR SITE
+$btn-color-btn-text       : $color-white !default;
+$btn-color-btn-text-hover : $color-white !default;
+$btn-background           : $color-primary !default;
+$btn-background-hover     : $color-primary-alt !default; //darken($btn-background,15%) !default;
+$btn-base-border          : 0 !default;
+$btn-standard-capitalization : uppercase !default;
+$btn-base-font-size : $font-size-base !default;
+$btn-base-padding : 15px 30px !default;
+
+
+// VARIATION - TRANSPARENT BUTTON
+$btn--trans-color               : $color-white !default;
+$btn--trans-color-hover         : $color-black !default;
+$btn--trans-border              : $color-white !default;
+$btn--trans-background          : $color-white !default;
+$btn--trans-background-hover    : $color-white !default;
+$btn--trans-opacity-hover       : 0.8 !default;
+$btn--trans-border-hover  : null !default;
+
+
+/*------------------------------------*\
+    BUTTON STYLES
+\*------------------------------------*/
+button, a.button {
+    appearance: none;
+    display: inline-block;
+    padding: $btn-base-padding;
+    font-size: $btn-base-font-size;
+    font-weight: bold;
+    line-height: 1;
+    color: $btn-color-btn-text;
+    cursor: pointer;
+    text-transform: $btn-standard-capitalization;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    vertical-align: middle;
+    border: $btn-base-border;
+    border-radius: 3px;
+    background-color: $btn-background;
+    transition: background-color $animation-duration $animation-timing;
+    &:hover,
+    &:focus {
+        color: $btn-color-btn-text-hover;
+        text-decoration: none;
+        background-color: $btn-background-hover;
+    }
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+        &:hover {
+            background-color: $btn-background;
+        }
+    }
+
+    // BUTTON VARIANTS
+    // BUTTON - SMALL
+    &.small {
+        height: 30px;
+        line-height: 30px;
+        padding: 0 $btn-base-padding;
+    }
+    
+    // BUTTON - TRANSPARENT
+    &.transparent {
+        color: $btn--trans-color;
+        border: 2px solid $btn--trans-border;
+        background-color: transparent;
+        &:hover {
+            color: $btn--trans-color-hover;
+            border: $btn--trans-border-hover;
+            @include background-RGBA($btn--trans-background-hover, $btn--trans-opacity-hover);
+        }
+    }
+}
